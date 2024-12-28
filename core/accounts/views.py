@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from rest_framework import generics
-from .serializers import UserSerializer
 from rest_framework.permissions import AllowAny
+from rest_framework import viewsets
+from .serializers import UserSerializer
 from .forms import CustomUserCreationForm
 from .models import User
 
@@ -48,7 +49,7 @@ class RegisterView(FormView):
         return super().form_valid(form)
 
 
-class UserCreate(generics.CreateAPIView):
+class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class =UserSerializer
     permission_classes = [AllowAny]

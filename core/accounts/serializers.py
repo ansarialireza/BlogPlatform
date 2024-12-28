@@ -3,7 +3,7 @@ from .models import User
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        Model = User
+        model = User
         fields = ('id','email','password',)
 
     def create(self, validated_data):

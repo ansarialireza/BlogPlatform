@@ -1,10 +1,13 @@
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth import login
 from django.contrib import messages
-from .forms import CustomUserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import FormView
-# from .forms import CustomAuthenticationForm
+from rest_framework import generics
+from .serializers import UserSerializer
+from rest_framework.permissions import AllowAny
+from .forms import CustomUserCreationForm
+from .models import User
 
 
 class LoginView(LoginView):
@@ -43,3 +46,9 @@ class RegisterView(FormView):
         form.save()
         messages.success(self.request, "ثبت نام با موفقیت انجام شد")
         return super().form_valid(form)
+
+
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class =UserSerializer
+    permission_classes = [AllowAny]

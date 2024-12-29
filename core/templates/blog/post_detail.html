@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- blog/templates/blog/post_detail.html -->
+
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<p>دسته‌بندی: {{ post.category.name }}</p>
+<p>نویسنده: {{ post.author.profile.first_name|default:"نام نامشخص" }} {{ post.author.profile.last_name|default:"نام نامشخص" }}</p>
+<h2>کامنت‌ها</h2>
+<ul>
+    {% for comment in post.comments.all %}
+        <li>
+            <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+            <a href="{% url 'comment:comment-delete' comment.pk %}">حذف</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'comment:comment-create' post.pk %}">اضافه کردن کامنت</a>
+<a href="{% url 'blog:post-update' post.pk %}">ویرایش</a>
+<a href="{% url 'blog:post-delete' post.pk %}">حذف</a>
+<a href="{% url 'blog:post-list' %}">بازگشت به لیست</a>
+
+{% endblock %}

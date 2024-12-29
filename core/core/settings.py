@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     "rest_framework.authtoken",
     'django_celery_beat',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -166,3 +167,8 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React app's URL
+]

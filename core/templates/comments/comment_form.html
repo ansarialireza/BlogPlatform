@@ -1,0 +1,9 @@
+<!-- comments/templates/comments/comment_form.html -->
+
+<h1>اضافه کردن کامنت</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ارسال</button>
+</form>
+<a href="{% url 'blog:post-detail' post_id %}">بازگشت به جزئیات پست</a>

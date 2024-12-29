@@ -1,0 +1,15 @@
+<!-- comments/templates/comments/comment_list.html -->
+
+<h1>کامنت‌ها برای پست: {{ post.title }}</h1>
+<ul>
+    {% for comment in comments %}
+        <li>
+            <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+            <a href="{% url 'comment:comment-delete' comment.pk %}">حذف</a>
+        </li>
+    {% empty %}
+        <li>هیچ کامنتی وجود ندارد.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'comment:comment-create' post.pk %}">اضافه کردن کامنت جدید</a>
+<a href="{% url 'blog:post-detail' post.pk %}">بازگشت به جزئیات پست</a>

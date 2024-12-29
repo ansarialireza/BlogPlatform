@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- blog/templates/blog/post_list.html -->
+
+<h1>پست‌ها</h1>
+<a href="{% url 'blog:post-create' %}">ایجاد پست جدید</a>
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'blog:post-detail' post.pk %}">{{ post.title }}</a>
+            <a href="{% url 'blog:post-update' post.pk %}">ویرایش</a>
+            <a href="{% url 'blog:post-delete' post.pk %}">حذف</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

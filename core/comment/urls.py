@@ -1,9 +1,10 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
-from .views import CommentViewSet
+from .views import CommentListView, CommentCreateView, CommentDeleteView
 
-router = DefaultRouter()
-router.register(r'comments',CommentViewSet)
+app_name = 'comment'
 
-urlpatterns = router.urls
-
+urlpatterns = [
+    path('post/<int:post_id>/comments/', CommentListView.as_view(), name='comment-list'),
+    path('post/<int:post_id>/comments/new/', CommentCreateView.as_view(), name='comment-create'),
+    path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+]

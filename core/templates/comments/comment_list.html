@@ -1,15 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
 <!-- comments/templates/comments/comment_list.html -->
 
-<h1>کامنت‌ها برای پست: {{ post.title }}</h1>
-<ul>
-    {% for comment in comments %}
-        <li>
-            <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
-            <a href="{% url 'comment:comment-delete' comment.pk %}">حذف</a>
-        </li>
-    {% empty %}
-        <li>هیچ کامنتی وجود ندارد.</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'comment:comment-create' post.pk %}">اضافه کردن کامنت جدید</a>
-<a href="{% url 'blog:post-detail' post.pk %}">بازگشت به جزئیات پست</a>
+<div class="container mt-4">
+    <h1 class="mb-4">کامنت‌ها برای پست: {{ post.title }}</h1>
+    <ul class="list-group mb-4">
+        {% for comment in comments %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+                <a href="{% url 'comment:comment-delete' comment.pk %}" class="btn btn-danger btn-sm">حذف</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">هیچ کامنتی وجود ندارد.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'comment:comment-create' post.pk %}" class="btn btn-primary mb-2">اضافه کردن کامنت جدید</a>
+    <a href="{% url 'blog:post-detail' post.pk %}" class="btn btn-secondary">بازگشت به جزئیات پست</a>
+</div>
+{% endblock %}

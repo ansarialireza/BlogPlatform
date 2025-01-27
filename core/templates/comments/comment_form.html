@@ -1,9 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load custom_filters %}
 <!-- comments/templates/comments/comment_form.html -->
 
-<h1>اضافه کردن کامنت</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">ارسال</button>
-</form>
-<a href="{% url 'blog:post-detail' post_id %}">بازگشت به جزئیات پست</a>
+<div class="container mt-4 text-right">
+    <h1 class="mb-4">اضافه کردن کامنت</h1>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field|add_class:"form-control" }}
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">ارسال</button>
+    </form>
+    <a href="{% url 'blog:post-detail' post_id %}" class="btn btn-secondary">بازگشت به جزئیات پست</a>
+</div>
+{% endblock %}

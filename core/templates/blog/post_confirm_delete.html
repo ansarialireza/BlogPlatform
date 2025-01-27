@@ -3,12 +3,14 @@
 {% block content %}
 <!-- blog/templates/blog/post_confirm_delete.html -->
 
-<h1>تأیید حذف پست</h1>
-<p>آیا مطمئن هستید که می‌خواهید "{{ object.title }}" را حذف کنید؟</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">حذف</button>
-</form>
-<a href="{% url 'post-list' %}">بازگشت به لیست پست‌ها</a>
+<div class="container mt-4">
+    <h1 class="mb-4">تأیید حذف پست</h1>
+    <p>آیا مطمئن هستید که می‌خواهید "{{ object.title }}" را حذف کنید؟</p>
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">حذف</button>
+    </form>
+    <a href="{% url 'blog:post-list' %}" class="btn btn-secondary">بازگشت به لیست پست‌ها</a>
+</div>
 
 {% endblock %}

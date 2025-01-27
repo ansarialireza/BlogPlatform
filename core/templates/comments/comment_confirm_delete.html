@@ -1,9 +1,11 @@
 <!-- comments/templates/comments/comment_confirm_delete.html -->
 
-<h1>تأیید حذف کامنت</h1>
-<p>آیا مطمئن هستید که می‌خواهید این کامنت را حذف کنید؟</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">حذف</button>
-</form>
-<a href="{% url 'blog:post-detail' object.post.pk %}">بازگشت به جزئیات پست</a>
+<div class="container mt-4">
+    <h1 class="mb-4">تأیید حذف کامنت</h1>
+    <p>آیا مطمئن هستید که می‌خواهید این کامنت را حذف کنید؟</p>
+    <form method="post" class="mb-4">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">حذف</button>
+    </form>
+    <a href="{% url 'blog:post-detail' object.post.pk %}" class="btn btn-secondary">بازگشت به جزئیات پست</a>
+</div>

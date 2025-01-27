@@ -3,22 +3,28 @@
 {% block content %}
 <!-- blog/templates/blog/post_detail.html -->
 
-<h1>{{ post.title }}</h1>
-<p>{{ post.content }}</p>
-<p>دسته‌بندی: {{ post.category.name }}</p>
-<p>نویسنده: {{ post.author.profile.first_name|default:"نام نامشخص" }} {{ post.author.profile.last_name|default:"نام نامشخص" }}</p>
-<h2>کامنت‌ها</h2>
-<ul>
-    {% for comment in post.comments.all %}
-        <li>
-            <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
-            <a href="{% url 'comment:comment-delete' comment.pk %}">حذف</a>
-        </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'comment:comment-create' post.pk %}">اضافه کردن کامنت</a>
-<a href="{% url 'blog:post-update' post.pk %}">ویرایش</a>
-<a href="{% url 'blog:post-delete' post.pk %}">حذف</a>
-<a href="{% url 'blog:post-list' %}">بازگشت به لیست</a>
+<div class="container mt-4">
+    <h1>{{ post.title }}</h1>
+    <p class="lead">{{ post.content }}</p>
+    <p><strong>دسته‌بندی:</strong> {{ post.category.name }}</p>
+    <p><strong>نویسنده:</strong> {{ post.author.profile.first_name|default:"نام نامشخص" }} {{ post.author.profile.last_name|default:"نام نامشخص" }}</p>
+
+    <h2 class="mt-4">کامنت‌ها</h2>
+    <ul class="list-group mb-4">
+        {% for comment in post.comments.all %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>{{ comment.author.username }}</strong>: {{ comment.content }}
+                <a href="{% url 'comment:comment-delete' comment.pk %}" class="btn btn-danger btn-sm">حذف</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">هیچ کامنتی وجود ندارد.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'comment:comment-create' post.pk %}" class="btn btn-primary mb-3">اضافه کردن کامنت</a>
+    <a href="{% url 'blog:post-update' post.pk %}" class="btn btn-warning mb-3">ویرایش</a>
+    <a href="{% url 'blog:post-delete' post.pk %}" class="btn btn-danger mb-3">حذف</a>
+    <a href="{% url 'blog:post-list' %}" class="btn btn-secondary">بازگشت به لیست</a>
+</div>
 
 {% endblock %}

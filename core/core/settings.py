@@ -172,3 +172,5 @@ CACHES = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React app's URL
 ]
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/' 

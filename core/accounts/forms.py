@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from .models import User
+from .models import User,Profile
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -28,17 +28,8 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError("ایمیل وارد شده قبلاً ثبت شده است.")
         return email
 
-# class CustomAuthenticationForm(AuthenticationForm):
-#     email = forms.EmailField(label="ایمیل", widget=forms.EmailInput(attrs={"class": "form-control"}))
-
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields.pop("username")  # Remove default username field
-
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         email = cleaned_data.get("email")
-#         if email:
-#             # Map email to username for authentication
-#             self.cleaned_data["username"] = email
-#         return self.cleaned_data
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name',]
+        
